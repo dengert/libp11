@@ -25,7 +25,7 @@
 #include <openssl/ossl_typ.h>
 #include <openssl/asn1.h>
 
-#if OPENSSL_VERSION_NUMBER >= 0x10100002L
+#if OPENSSL_VERSION_NUMBER >= 0x10100002L || defined(BUILD_ECDH_102)
 /* initial code will only support what is needed for pkcs11_ec_ckey
  * i.e. CKM_ECDH1_DERIVE, CKM_ECDH1_COFACTOR_DERIVE
  * and CK_EC_KDF_TYPE  supported by token

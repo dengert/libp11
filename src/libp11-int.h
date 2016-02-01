@@ -207,7 +207,7 @@ int PKCS11_relogin(PKCS11_SLOT * slot);
 extern PKCS11_KEY_ops pkcs11_rsa_ops;
 extern PKCS11_KEY_ops *pkcs11_ec_ops;
 
-#if OPENSSL_VERSION_NUMBER >= 0x10100002L
+#if  OPENSSL_VERSION_NUMBER >= 0x10100002L || defined(BUILD_ECDH_102)
 /**
  * @param out returned secret
  * @param outlen length of returned secret

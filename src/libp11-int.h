@@ -138,6 +138,12 @@ typedef struct pkcs11_cert_private {
 int pkcs11_get_new_dynlockid();
 void pkcs11_destroy_dynlockid(int);
 
+#if OPENSSL_VERSION_NUMBER >= 0x10100000L
+#define pkcs11_w_lock(type)
+#define pkcs11_w_unlock(type)
+#define pkcs11_r_lock(type)
+#define pkcs11_r_unlock(type)
+#else
 #define pkcs11_w_lock(type)    \
 	if(type) CRYPTO_lock(CRYPTO_LOCK|CRYPTO_WRITE,type,__FILE__,__LINE__)
 #define pkcs11_w_unlock(type)  \
@@ -146,6 +152,7 @@ void pkcs11_destroy_dynlockid(int);
 	if(type) CRYPTO_lock(CRYPTO_LOCK|CRYPTO_READ,type,__FILE__,__LINE__)
 #define pkcs11_r_unlock(type)  \
 	if(type) CRYPTO_lock(CRYPTO_UNLOCK|CRYPTO_READ,type,__FILE__,__LINE__)
+#endif
 
 extern int pkcs11_enumerate_slots(PKCS11_CTX *, PKCS11_SLOT **, unsigned int *);
 extern void pkcs11_release_slot(PKCS11_CTX *, PKCS11_SLOT *slot);

@@ -231,7 +231,7 @@ loggedin:
 
 	CRYPTO_cleanup_all_ex_data();
 	ERR_free_strings();
-	ERR_remove_thread_state(NULL);
+	ERR_remove_thread_state();
 
 	printf("decryption successfull.\n");
 	return 0;

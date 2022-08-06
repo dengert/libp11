@@ -136,6 +136,7 @@ list_objects () {
 	echo "***************"
 	echo "Listing objects"
 	echo "***************"
+	pkcs11-tool -p ${PIN} --module ${MODULE} --show-info --list-slots --list-token-slots
 	pkcs11-tool -p ${PIN} --module ${MODULE} -l -O
 }
 

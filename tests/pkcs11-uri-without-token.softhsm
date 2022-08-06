@@ -1,4 +1,5 @@
 #!/bin/sh
+set -xv
 
 # Copyright (C) 2015 Nikos Mavrogiannopoulos
 #
@@ -46,8 +47,9 @@ export OPENSSL_ENGINES="../src/.libs/"
 export OPENSSL_CONF="${outdir}/engines.cnf"
 
 # These URIs don't contain the token specification
-PRIVATE_KEY="pkcs11:object=server-key;type=private;pin-value=1234"
-PUBLIC_KEY="pkcs11:object=server-key;type=public;pin-value=1234"
+# Without id, tests fails as there are two slots,one good one uninitilized
+PRIVATE_KEY="pkcs11:id=%01%02%03%04;object=server-key;type=private;pin-value=1234"
+PUBLIC_KEY="pkcs11:id=%01%02%03%04;object=server-key;type=public;pin-value=1234"
 
 # Create input file
 echo "secret" >"${outdir}/in.txt"
